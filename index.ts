@@ -31,6 +31,7 @@ export interface NaverLoginResponse {
     lastErrorDescriptionFromNaverSDK?: string;
   };
 }
+//aaaaa
 
 const login = ({
   appName,
@@ -41,12 +42,12 @@ const login = ({
 }: NaverLoginRequest): Promise<NaverLoginResponse> =>
   Platform.OS === "ios"
     ? RNNaverLogin.login(
-        serviceUrlScheme,
-        consumerKey,
-        consumerSecret,
-        appName,
-        disableNaverAppAuth
-      )
+      serviceUrlScheme,
+      consumerKey,
+      consumerSecret,
+      appName,
+      disableNaverAppAuth
+    )
     : RNNaverLogin.login(consumerKey, consumerSecret, appName);
 
 const logout = async (): Promise<void> => {
