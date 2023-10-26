@@ -57,14 +57,15 @@ const deleteToken = async (): Promise<void> => {
   await RNNaverLogin.deleteToken();
 };
 
-const deleteTokenWithInit = ({
+const deleteTokenWithInit = async ({
   appName,
   consumerKey,
   consumerSecret,
-}: NaverLoginRequest): Promise<void> =>
-  Platform.OS === "ios"
-    ? RNNaverLogin.deleteToken()
-    : RNNaverLogin.deleteTokenWithInit(consumerKey, consumerSecret, appName)
+}: NaverLoginRequest): Promise<void> => {
+  return Platform.OS === "ios"
+    ? await RNNaverLogin.deleteToken()
+    : await RNNaverLogin.deleteTokenWithInit(consumerKey, consumerSecret, appName)
+}
 
 
 export interface GetProfileResponse {
