@@ -31,7 +31,6 @@ export interface NaverLoginResponse {
     lastErrorDescriptionFromNaverSDK?: string;
   };
 }
-//aaaaa
 
 const login = ({
   appName,
@@ -57,6 +56,16 @@ const logout = async (): Promise<void> => {
 const deleteToken = async (): Promise<void> => {
   await RNNaverLogin.deleteToken();
 };
+
+const deleteTokenWithInit = ({
+  appName,
+  consumerKey,
+  consumerSecret,
+}: NaverLoginRequest): Promise<void> =>
+  Platform.OS === "ios"
+    ? RNNaverLogin.deleteToken()
+    : RNNaverLogin.deleteTokenWithInit(consumerKey, consumerSecret, appName)
+
 
 export interface GetProfileResponse {
   resultcode: string;
@@ -98,5 +107,6 @@ const NaverLogin = {
   logout,
   deleteToken,
   getProfile,
+  deleteTokenWithInit
 };
 export default NaverLogin;
